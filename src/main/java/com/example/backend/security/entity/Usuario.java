@@ -1,18 +1,22 @@
 package com.example.backend.security.entity;
 
+import org.hibernate.annotations.NaturalId;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public class Usuario {
+public class Usuario implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @NotNull
     private String nombre;
     @NotNull
+    @NaturalId
     @Column(unique = true)
     private String nombreUsuario;
     @NotNull
