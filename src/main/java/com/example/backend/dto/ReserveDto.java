@@ -1,32 +1,44 @@
 package com.example.backend.dto;
 
 
+import com.example.backend.security.dto.NuevoUsuario;
+
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
 
 public class ReserveDto {
-    @Min(1)
+
+    private String tourName;
+    @Min(0)
     private int persons;
-    @Min(0)
-    private float Total;
-    @Min(0)
-    private float Iva;
-    @NotBlank
-    private String Name;
+    private float total;
+    private float iva;
+    private String name;
+    private String mail;
     private int tour;
-    private String usuario;
+    private NuevoUsuario usuario;
 
     public ReserveDto() {
     }
 
-    public ReserveDto(@Min(1) int persons, @Min(0) float total, @Min(0) float iva, @NotBlank String name, int tour, String usuario) {
+    public ReserveDto(String tourName, @Min(0) int persons, float total, float iva, String name, String mail, int tour, NuevoUsuario usuario) {
+        this.tourName = tourName;
         this.persons = persons;
-        Total = total;
-        Iva = iva;
-        Name = name;
+        this.total = total;
+        this.iva = iva;
+        this.name = name;
+        this.mail = mail;
         this.tour = tour;
         this.usuario = usuario;
+    }
+
+    public String getTourName() {
+        return tourName;
+    }
+
+    public void setTourName(String tourName) {
+        this.tourName = tourName;
     }
 
     public int getPersons() {
@@ -38,27 +50,35 @@ public class ReserveDto {
     }
 
     public float getTotal() {
-        return Total;
+        return total;
     }
 
     public void setTotal(float total) {
-        Total = total;
+        this.total = total;
     }
 
     public float getIva() {
-        return Iva;
+        return iva;
     }
 
     public void setIva(float iva) {
-        Iva = iva;
+        this.iva = iva;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
     }
 
     public int getTour() {
@@ -69,11 +89,11 @@ public class ReserveDto {
         this.tour = tour;
     }
 
-    public String getUsuario() {
+    public NuevoUsuario getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(String usuario) {
+    public void setUsuario(NuevoUsuario usuario) {
         this.usuario = usuario;
     }
 }

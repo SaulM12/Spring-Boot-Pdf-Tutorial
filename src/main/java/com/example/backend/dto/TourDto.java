@@ -1,6 +1,7 @@
 package com.example.backend.dto;
 
 import com.example.backend.entity.Place;
+import com.example.backend.entity.Tour;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -8,6 +9,7 @@ import javax.validation.constraints.NotBlank;
 
 public class TourDto {
 
+    private int id;
     @NotBlank
     private String name;
     private String description;
@@ -17,12 +19,13 @@ public class TourDto {
     @Min(0)
     private Float cost;
     private String image;
-    private int place;
+    private PlaceDto place;
 
     public TourDto() {
     }
 
-    public TourDto(@NotBlank String name, String description, String duration, @Min(0) int disponibility, @Min(0) Float cost, String image, int place) {
+    public TourDto(int id, @NotBlank String name, String description, String duration, @Min(0) int disponibility, @Min(0) Float cost, String image, PlaceDto place) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.duration = duration;
@@ -30,6 +33,21 @@ public class TourDto {
         this.cost = cost;
         this.image = image;
         this.place = place;
+    }
+    public TourDto(Tour tour){
+        this.id= tour.getId();
+        this.name=tour.getName();
+        this.description = tour.getDescription();
+        this.duration = tour.getDuration();
+        this.disponibility = tour.getDisponibility();
+        this.cost = tour.getCost();
+        this.image = tour.getImage();
+
+
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {
@@ -72,19 +90,19 @@ public class TourDto {
         this.cost = cost;
     }
 
-    public int getPlace() {
-        return place;
-    }
-
-    public void setPlace(int place) {
-        this.place = place;
-    }
-
     public String getImage() {
         return image;
     }
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public PlaceDto getPlace() {
+        return place;
+    }
+
+    public void setPlace(PlaceDto place) {
+        this.place = place;
     }
 }

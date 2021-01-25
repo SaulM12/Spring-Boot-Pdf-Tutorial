@@ -46,13 +46,13 @@ public class TourController {
     }
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody TourDto tourDto){
-        Place place = placeService.getOne(tourDto.getPlace()).get();
+        Place place = placeService.getOne(tourDto.getPlace().getId()).get();
         if(StringUtils.isBlank(tourDto.getName()))
             return new ResponseEntity(new Message("El nombre es obligatorio"), HttpStatus.BAD_REQUEST);
         if(tourService.existByName(tourDto.getName()))
             return new ResponseEntity(new Message("Ese nombre ya existe"), HttpStatus.BAD_REQUEST);
-        if(tourDto.getDisponibility()<0)
-            return new ResponseEntity(new Message("Rango de disponibilidad no aceptado"), HttpStatus.BAD_REQUEST);
+        if(tourDto.getDisponibility()<=0)
+            return new ResponseEntity(new Message("Número de personas no puede ser igual cero"), HttpStatus.BAD_REQUEST);
         if(tourDto.getCost()==null || tourDto.getCost()<0)
             return new ResponseEntity(new Message("Rango de Costo no aceptado"), HttpStatus.BAD_REQUEST);
 

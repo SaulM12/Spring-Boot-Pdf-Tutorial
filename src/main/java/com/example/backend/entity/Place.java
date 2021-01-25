@@ -1,10 +1,10 @@
 package com.example.backend.entity;
 
 import javax.persistence.*;
-import java.util.Set;
+
 
 @Entity
-public class Place  {
+public class Place {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

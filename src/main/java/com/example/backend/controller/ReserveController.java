@@ -40,15 +40,17 @@ public class ReserveController {
         List<Reserve> list= (List<Reserve>) reserveService.listByUser_name(user_name);
         return new ResponseEntity(list, HttpStatus.OK);
     }
-    @PostMapping("/create")
-    public ResponseEntity<?> create(@RequestBody ReserveDto reserveDto){
-        Tour tour = tourService.getOne(reserveDto.getTour()).get();
-        Usuario usuario =usuarioService.getByNombreUsuario(reserveDto.getUsuario()).get();
+    @PostMapping("/tour/{id}")
+    public ResponseEntity<?> create(@PathVariable("id") int id, @RequestBody ReserveDto reserveDto){
+        Tour tour = tourService.getOne(id).get();
+        Usuario usuario =usuarioService.getByNombreUsuario(reserveDto.getUsuario().getNombreUsuario()).get();
         float total = tour.getCost() * reserveDto.getPersons();
         float iva= (float) (total-total/1.12);
-        if(reserveDto.getPersons()<0)
+        if(reserveDto.getPersons() > tour.getDisponibility())
+            return new ResponseEntity(new Message("Nuestra disponibilidad es menor a su petición"), HttpStatus.BAD_REQUEST);
+        if(reserveDto.getPersons()<=0)
             return new ResponseEntity(new Message("Rango de reservas no aceptado"), HttpStatus.BAD_REQUEST);
-        Reserve reserve = new Reserve(reserveDto.getPersons(),total,iva,usuario.getNombre(),tour,usuario);
+        Reserve reserve = new Reserve(tour.getName(),reserveDto.getPersons(),total,iva,usuario.getNombre(),usuario.getEmail(),tour,usuario);
         reserveService.save(reserve);
         return new ResponseEntity(new Message("Reserva enviada"),HttpStatus.OK);
     }

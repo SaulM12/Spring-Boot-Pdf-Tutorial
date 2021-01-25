@@ -10,24 +10,28 @@ public class Reserve {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    private String tourName;
     private int persons;
-    private float Total;
-    private float Iva;
-    private String Name;
+    private float total;
+    private float iva;
+    private String name;
+    private String mail;
     @ManyToOne
     private Tour tour;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "user_name", referencedColumnName = "nombreUsuario")
     private Usuario usuario;
 
     public Reserve() {
     }
 
-    public Reserve(int persons, float total, float iva, String name, Tour tour, Usuario usuario) {
+    public Reserve(String tourName, int persons, float total, float iva, String name, String mail, Tour tour, Usuario usuario) {
+        this.tourName = tourName;
         this.persons = persons;
-        Total = total;
-        Iva = iva;
-        Name = name;
+        this.total = total;
+        this.iva = iva;
+        this.name = name;
+        this.mail = mail;
         this.tour = tour;
         this.usuario = usuario;
     }
@@ -40,6 +44,14 @@ public class Reserve {
         this.id = id;
     }
 
+    public String getTourName() {
+        return tourName;
+    }
+
+    public void setTourName(String tourName) {
+        this.tourName = tourName;
+    }
+
     public int getPersons() {
         return persons;
     }
@@ -49,27 +61,35 @@ public class Reserve {
     }
 
     public float getTotal() {
-        return Total;
+        return total;
     }
 
     public void setTotal(float total) {
-        Total = total;
+        this.total = total;
     }
 
     public float getIva() {
-        return Iva;
+        return iva;
     }
 
     public void setIva(float iva) {
-        Iva = iva;
+        this.iva = iva;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
     }
 
     public Tour getTour() {
