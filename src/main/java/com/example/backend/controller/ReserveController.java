@@ -40,9 +40,9 @@ public class ReserveController {
         List<Reserve> list= (List<Reserve>) reserveService.listByUser_name(user_name);
         return new ResponseEntity(list, HttpStatus.OK);
     }
-    @PostMapping("/tour/{id}")
-    public ResponseEntity<?> create(@PathVariable("id") int id, @RequestBody ReserveDto reserveDto){
-        Tour tour = tourService.getOne(id).get();
+    @PostMapping("/create")
+    public ResponseEntity<?> create( @RequestBody ReserveDto reserveDto){
+        Tour tour = tourService.getOne(reserveDto.getTour().getId()).get();
         Usuario usuario =usuarioService.getByNombreUsuario(reserveDto.getUsuario().getNombreUsuario()).get();
         float total = tour.getCost() * reserveDto.getPersons();
         float iva= (float) (total-total/1.12);
@@ -54,9 +54,9 @@ public class ReserveController {
         reserveService.save(reserve);
         return new ResponseEntity(new Message("Reserva enviada"),HttpStatus.OK);
     }
-    @DeleteMapping("/delet/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") int id){
-        tourService.delete(id);
+        reserveService.delete(id);
         return new ResponseEntity(new Message("Reserva Cancelada"), HttpStatus.OK);
     }
 }

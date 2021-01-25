@@ -8,7 +8,6 @@ import javax.validation.constraints.NotBlank;
 
 
 public class ReserveDto {
-
     private String tourName;
     @Min(0)
     private int persons;
@@ -16,13 +15,13 @@ public class ReserveDto {
     private float iva;
     private String name;
     private String mail;
-    private int tour;
+    private TourDto tour;
     private NuevoUsuario usuario;
 
     public ReserveDto() {
     }
 
-    public ReserveDto(String tourName, @Min(0) int persons, float total, float iva, String name, String mail, int tour, NuevoUsuario usuario) {
+    public ReserveDto(String tourName, @Min(0) int persons, float total, float iva, String name, String mail, TourDto tour, NuevoUsuario usuario) {
         this.tourName = tourName;
         this.persons = persons;
         this.total = total;
@@ -81,11 +80,11 @@ public class ReserveDto {
         this.mail = mail;
     }
 
-    public int getTour() {
+    public TourDto getTour() {
         return tour;
     }
 
-    public void setTour(int tour) {
+    public void setTour(TourDto tour) {
         this.tour = tour;
     }
 

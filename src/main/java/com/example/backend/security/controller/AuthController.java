@@ -78,4 +78,9 @@ public class AuthController {
         JwtDto jwtDto = new JwtDto(jwt, userDetails.getUsername(), userDetails.getAuthorities());
         return new ResponseEntity(jwtDto, HttpStatus.OK);
     }
+    @GetMapping("/user/{nombre_usuario}")
+    public ResponseEntity<Usuario> getByName(@PathVariable("nombre_usuario") String nombre_usuario){
+        Usuario usuario= usuarioService.getByNombreUsuario(nombre_usuario).get();
+        return new ResponseEntity(usuario, HttpStatus.OK);
+    }
 }
