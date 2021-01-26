@@ -49,14 +49,14 @@ public class ReserveController {
         if(reserveDto.getPersons() > tour.getDisponibility())
             return new ResponseEntity(new Message("Nuestra disponibilidad es menor a su petición"), HttpStatus.BAD_REQUEST);
         if(reserveDto.getPersons()<=0)
-            return new ResponseEntity(new Message("Rango de reservas no aceptado"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new Message("El número de personas no puede ser 0"), HttpStatus.BAD_REQUEST);
         Reserve reserve = new Reserve(tour.getName(),reserveDto.getPersons(),total,iva,usuario.getNombre(),usuario.getEmail(),tour,usuario);
         reserveService.save(reserve);
-        return new ResponseEntity(new Message("Reserva enviada"),HttpStatus.OK);
+        return new ResponseEntity(new Message("Reserva realizada"),HttpStatus.OK);
     }
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") int id){
         reserveService.delete(id);
-        return new ResponseEntity(new Message("Reserva Cancelada"), HttpStatus.OK);
+        return new ResponseEntity(new Message("Hemos cancelado su reserva"), HttpStatus.OK);
     }
 }

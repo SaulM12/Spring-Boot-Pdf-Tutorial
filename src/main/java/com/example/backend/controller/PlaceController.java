@@ -48,7 +48,7 @@ public class PlaceController {
         if(StringUtils.isBlank(placeDto.getName()))
             return new ResponseEntity(new Message("El nombre es obligatorio"), HttpStatus.BAD_REQUEST);
         if(placeService.existByName(placeDto.getName()))
-            return new ResponseEntity(new Message("Ese nombre ya existe"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new Message("Ese lugar ya existe"), HttpStatus.BAD_REQUEST);
         Place place= new Place(placeDto.getName(),placeDto.getDescription(),placeDto.getUbication(),placeDto.getImage1()
         , placeDto.getImage2(), placeDto.getImage3());
         placeService.save(place);
@@ -61,7 +61,7 @@ public class PlaceController {
         if (!placeService.existById(id))
             return new ResponseEntity(new Message("No existe"), HttpStatus.NOT_FOUND);
         if(placeService.existByName(placeDto.getName()) && placeService.getByName(placeDto.getName()).get().getId() != id)
-            return new ResponseEntity(new Message("Ese nombre ya existe"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new Message("Ese lugar ya existe"), HttpStatus.BAD_REQUEST);
         if(StringUtils.isBlank(placeDto.getName()))
             return new ResponseEntity(new Message("El nombre es obligatorio"), HttpStatus.BAD_REQUEST);
 
