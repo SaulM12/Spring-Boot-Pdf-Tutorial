@@ -72,7 +72,7 @@ public class TourController {
             return new ResponseEntity(new Message("El nombre es obligatorio"), HttpStatus.BAD_REQUEST);
         if(tourDto.getDisponibility()<0)
             return new ResponseEntity(new Message("Debe asignar un número de cupos válido"), HttpStatus.BAD_REQUEST);
-        if(tourDto.getCost()==null || tourDto.getCost()<0)
+        if(tourDto.getCost()==null || tourDto.getCost()<=0)
             return new ResponseEntity(new Message("El costo del tour no puede ser 0"), HttpStatus.BAD_REQUEST);
 
         Tour tour= tourService.getOne(id).get();
