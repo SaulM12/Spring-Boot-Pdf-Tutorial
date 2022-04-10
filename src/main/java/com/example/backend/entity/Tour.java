@@ -16,7 +16,6 @@ public class Tour {
     private int disponibility;
     private Float cost;
     private String image;
-    private transient int placeId;
     @ManyToOne
     private Place place;
 

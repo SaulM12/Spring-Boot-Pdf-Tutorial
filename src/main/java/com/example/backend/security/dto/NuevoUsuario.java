@@ -1,5 +1,7 @@
 package com.example.backend.security.dto;
 
+import com.example.backend.security.entity.Usuario;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.util.HashSet;
@@ -15,6 +17,24 @@ public class NuevoUsuario {
     @NotBlank
     private String password;
     private Set<String> roles = new HashSet<>();
+
+    public NuevoUsuario() {
+    }
+
+    public NuevoUsuario(@NotBlank String nombre, @NotBlank String nombreUsuario, @Email String email, @NotBlank String password, Set<String> roles) {
+        this.nombre = nombre;
+        this.nombreUsuario = nombreUsuario;
+        this.email = email;
+        this.password = password;
+        this.roles = roles;
+    }
+    public NuevoUsuario(Usuario usuario) {
+        this.nombre = usuario.getNombre();
+        this.nombreUsuario = usuario.getNombreUsuario();
+        this.email = usuario.getEmail();
+        this.password = usuario.getPassword();
+
+    }
 
     public String getNombre() {
         return nombre;

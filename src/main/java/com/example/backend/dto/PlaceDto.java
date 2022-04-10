@@ -1,9 +1,12 @@
 package com.example.backend.dto;
+import com.example.backend.entity.Place;
+
 import javax.validation.constraints.NotBlank;
 
 public class PlaceDto {
 
     @NotBlank
+    private int id;
     private String name;
     private String description;
     private String ubication;
@@ -14,13 +17,28 @@ public class PlaceDto {
     public PlaceDto() {
     }
 
-    public PlaceDto(String name, String description, String ubication, String image1, String image2, String image3) {
+    public PlaceDto(@NotBlank int id, String name, String description, String ubication, String image1, String image2, String image3) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.ubication = ubication;
         this.image1 = image1;
         this.image2 = image2;
         this.image3 = image3;
+    }
+
+    public PlaceDto(Place place) {
+        this.id= place.getId();
+        this.name = place.getName();
+        this.description = place.getDescription();
+        this.ubication = place.getUbication();
+        this.image1 = place.getImage1();
+        this.image2 = place.getImage2();
+        this.image3 = place.getImage3();
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {
