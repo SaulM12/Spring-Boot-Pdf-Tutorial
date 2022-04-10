@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="../pdf-resources/css/placesPdfStyle.css" />
+</head>
+
+<body>
+    <div class="header">
+        <img src="../pdf-resources/images/logo.jpg" alt="" class="logo">
+    </div>
+    <h1> Lista de lugares disponibles </h1>
+
+    <table class="table-places  paginate-table">
+        <thead>
+            <tr>
+            <th class="tittle-container">Nombre</th>
+            <th class="tittle-container">Ubicación</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="place: ${places}">
+                <td th:text="${place.name}">
+                </td>
+                <td th:text="${place.ubication}">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <span th:text="'Count:' + ${#lists.size(places)}"></span>
+</body>
+
+</html>
+
+</html>
